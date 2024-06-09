@@ -14,7 +14,7 @@ public class BasketGame : MonoBehaviour
     [SerializeField] Vector3 _minBounds;
     [SerializeField] Vector3 _maxBounds;
     [SerializeField] float _throwHeight = 5.0f;
-    [SerializeField] float _stealRange = 0.5f; // Радиус отбора мяча
+    [SerializeField] float _stealRange = 0.5f; 
 
     private BallController _ballController;
     public bool _isBallInHands = false;
@@ -83,7 +83,6 @@ public class BasketGame : MonoBehaviour
             }
         }
 
-        // Проверка нажатия кнопки отбора мяча
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
             TryStealBall();

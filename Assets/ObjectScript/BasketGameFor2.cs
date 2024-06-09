@@ -14,10 +14,9 @@ public class OpponentBasketGame : MonoBehaviour
     [SerializeField] Vector3 _minBounds;
     [SerializeField] Vector3 _maxBounds;
     [SerializeField] float _throwHeight = 5.0f;
-    [SerializeField] float _stealRange = 0.5f; // Радиус отбора мяча
-
+    [SerializeField] float _stealRange = 0.5f; 
     private BallController _ballController;
-    public bool _isBallInHands = false; // Сделаем поле публичным для доступа из другого скрипта
+    public bool _isBallInHands = false; 
     private bool _isBallFlying = false;
     private float _t = 0;
     private Vector3 _finalTargetPosition;
@@ -83,8 +82,7 @@ public class OpponentBasketGame : MonoBehaviour
             }
         }
 
-        // Проверка нажатия кнопки отбора мяча
-        if (Input.GetKeyDown(KeyCode.LeftControl)) // Используем кнопку 0 на NumPad для отбора мяча
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             TryStealBall();
         }

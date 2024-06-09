@@ -5,24 +5,12 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    [SerializeField] Text _scoreText;  // UI элемент для отображения очков
-    private int _score = 0;  // Переменная для хранения очков
+    [SerializeField] Text _scoreText;  
+    private int _score = 0;  
 
     private void OnTriggerEnter(Collider other)
     {
-        UpdateScore(1);  // Обновляем очки при попадании
+        UpdateScore(1);  
     }
 
     private void UpdateScore(int points)

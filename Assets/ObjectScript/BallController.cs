@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public GameObject currentHolder; // Текущий игрок, владеющий мячом
+    public GameObject currentHolder; // Игрок у которого мяч
     public bool IsInHands => currentHolder != null; // Мяч в руках, если currentHolder не null
 
     public void ChangeHolder(GameObject newHolder)
