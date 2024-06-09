@@ -4,82 +4,82 @@ using UnityEngine;
 
 public class BasketGame : MonoBehaviour
 {
-    [SerializeField] float _speed = 10;
-    [SerializeField] Transform _ball;
-    [SerializeField] Transform _arms;
-    [SerializeField] Transform _posOverhead;
-    [SerializeField] Transform _posDribble;
-    [SerializeField] Transform _target;
-    [SerializeField] float _missRange = 0.5f;
-    [SerializeField] Vector3 _minBounds;
-    [SerializeField] Vector3 _maxBounds;
-    [SerializeField] float _throwHeight = 5.0f;
-    [SerializeField] float _stealRange = 0.5f; 
+    [SerializeField] float speed = 10;
+    [SerializeField] Transform ball;
+    [SerializeField] Transform arms;
+    [SerializeField] Transform posOverhead;
+    [SerializeField] Transform posDribble;
+    [SerializeField] Transform target;
+    [SerializeField] float missRange = 0.5f;
+    [SerializeField] Vector3 minBounds;
+    [SerializeField] Vector3 maxBounds;
+    [SerializeField] float throwHeight = 5.0f;
+    [SerializeField] float stealRange = 0.5f; 
 
-    private BallController _ballController;
-    public bool _isBallInHands = false;
-    private bool _isBallFlying = false;
-    private float _t = 0;
-    private Vector3 _finalTargetPosition;
+    private BallController ballController;
+    public bool isBallInHands = false;
+    private bool isBallFlying = false;
+    private float t = 0;
+    private Vector3 finalTargetPosition;
 
     void Start()
     {
-        _ballController = _ball.GetComponent<BallController>();
+        ballController = ball.GetComponent<BallController>();
     }
 
     void Update()
     {
         Vector3 direction = new Vector3(Input.GetAxisRaw("P1Vertical"), 0, -Input.GetAxisRaw("P1Horizontal"));
-        Vector3 newPosition = transform.position + direction * _speed * Time.deltaTime;
+        Vector3 newPosition = transform.position + direction * speed * Time.deltaTime;
 
         newPosition = ClampPosition(newPosition);
         transform.position = newPosition;
 
         transform.LookAt(transform.position + direction);
 
-        if (_isBallInHands)
+        if (isBallInHands)
         {
             if (Input.GetKey(KeyCode.RightShift))
             {
-                _ball.position = _posOverhead.position;
-                _arms.localEulerAngles = Vector3.right * 180;
-                transform.LookAt(_target.position);
+                ball.position = posOverhead.position;
+                arms.localEulerAngles = Vector3.right * 180;
+                transform.LookAt(target.position);
             }
             else
             {
-                _ball.position = _posDribble.position + Vector3.up / 2 * Mathf.Abs(Mathf.Sin(Time.time * 5));
-                _arms.localEulerAngles = Vector3.right * 0;
+                ball.position = posDribble.position + Vector3.up / 2 * Mathf.Abs(Mathf.Sin(Time.time * 5));
+                arms.localEulerAngles = Vector3.right * 0;
             }
 
             if (Input.GetKeyUp(KeyCode.RightShift))
             {
-                _isBallInHands = false;
-                _isBallFlying = true;
-                _t = 0;
-                _finalTargetPosition = GetFinalTargetPosition();
-                _ballController.ChangeHolder(null);
+                isBallInHands = false;
+                isBallFlying = true;
+                t = 0;
+                finalTargetPosition = GetFinalTargetPosition();
+                ballController.ChangeHolder(null);
             }
         }
 
-        if (_isBallFlying)
+        if (isBallFlying)
         {
-            _t += Time.deltaTime;
+            t += Time.deltaTime;
             float duration = 1.0f;
-            float t01 = _t / duration;
+            float t01 = t / duration;
 
-            Vector3 start = _posOverhead.position;
-            Vector3 end = _finalTargetPosition;
-            Vector3 mid = (start + end) / 2 + Vector3.up * _throwHeight;
+            Vector3 start = posOverhead.position;
+            Vector3 end = finalTargetPosition;
+            Vector3 mid = (start + end) / 2 + Vector3.up * throwHeight;
 
             Vector3 pos = (1 - t01) * (1 - t01) * start + 2 * (1 - t01) * t01 * mid + t01 * t01 * end;
 
-            _ball.position = ClampPosition(pos);
+            ball.position = ClampPosition(pos);
 
             if (t01 >= 1)
             {
-                _isBallFlying = false;
-                _ball.GetComponent<Rigidbody>().isKinematic = false;
-                _ball.GetComponent<Rigidbody>().useGravity = true;
+                isBallFlying = false;
+                ball.GetComponent<Rigidbody>().isKinematic = false;
+                ball.GetComponent<Rigidbody>().useGravity = true;
             }
         }
 
@@ -91,9 +91,9 @@ public class BasketGame : MonoBehaviour
 
     private Vector3 ClampPosition(Vector3 position)
     {
-        position.x = Mathf.Clamp(position.x, _minBounds.x, _maxBounds.x);
-        position.y = Mathf.Clamp(position.y, _minBounds.y, _maxBounds.y);
-        position.z = Mathf.Clamp(position.z, _minBounds.z, _maxBounds.z);
+        position.x = Mathf.Clamp(position.x, minBounds.x, maxBounds.x);
+        position.y = Mathf.Clamp(position.y, minBounds.y, maxBounds.y);
+        position.z = Mathf.Clamp(position.z, minBounds.z, maxBounds.z);
         return position;
     }
 
@@ -107,21 +107,21 @@ public class BasketGame : MonoBehaviour
                 offset = Vector3.zero;
                 break;
             case 1:
-                offset = new Vector3(-_missRange, 0, 0);
+                offset = new Vector3(-missRange, 0, 0);
                 break;
             case 2:
-                offset = new Vector3(_missRange, 0, 0);
+                offset = new Vector3(missRange, 0, 0);
                 break;
         }
-        return _target.position + offset;
+        return target.position + offset;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isBallInHands && !_isBallFlying && other.CompareTag("Ball") && _ballController.currentHolder == null)
+        if (!isBallInHands && !isBallFlying && other.CompareTag("Ball") && ballController.currentHolder == null)
         {
-            _ballController.ChangeHolder(gameObject);
-            _isBallInHands = true;
+            ballController.ChangeHolder(gameObject);
+            isBallInHands = true;
         }
     }
 
@@ -131,12 +131,12 @@ public class BasketGame : MonoBehaviour
         if (opponent != null)
         {
             float distance = Vector3.Distance(transform.position, opponent.transform.position);
-            if (distance <= _stealRange && _ballController.currentHolder == opponent)
+            if (distance <= stealRange && ballController.currentHolder == opponent)
             {
-                _ballController.ChangeHolder(gameObject);
-                _isBallInHands = true;
+                ballController.ChangeHolder(gameObject);
+                isBallInHands = true;
                 OpponentBasketGame opponentScript = opponent.GetComponent<OpponentBasketGame>();
-                opponentScript._isBallInHands = false;
+                opponentScript.isBallInHands = false;
             }
         }
     }

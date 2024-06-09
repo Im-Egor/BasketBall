@@ -3527,18 +3527,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb121a442e59a04c84b117465584de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
-  _ball: {fileID: 954123473}
-  _arms: {fileID: 1759880613}
-  _posOverhead: {fileID: 2122028930}
-  _posDribble: {fileID: 1064763630}
-  _target: {fileID: 1973567004}
-  _missRange: 1
-  _minBounds: {x: -3.75, y: 0.5, z: -6.9}
-  _maxBounds: {x: 3.75, y: 5, z: 6.9}
-  _throwHeight: 5
-  _stealRange: 0.5
-  _isBallInHands: 0
+  speed: 4
+  ball: {fileID: 954123473}
+  arms: {fileID: 1759880613}
+  posOverhead: {fileID: 2122028930}
+  posDribble: {fileID: 1064763630}
+  target: {fileID: 1973567004}
+  missRange: 0.5
+  minBounds: {x: -3.7, y: 0.5, z: -6.9}
+  maxBounds: {x: 3.7, y: 5, z: 6.9}
+  throwHeight: 5
+  stealRange: 0.5
+  isBallInHands: 0
 --- !u!4 &961573691
 Transform:
   m_ObjectHideFlags: 0
@@ -5550,7 +5550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171f6f189e275734ba2579057c7db9bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreText: {fileID: 962823721}
+  scoreText: {fileID: 962823721}
 --- !u!65 &1581943487
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5638,7 +5638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171f6f189e275734ba2579057c7db9bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreText: {fileID: 1513776634}
+  scoreText: {fileID: 1513776634}
 --- !u!1 &1646422703
 GameObject:
   m_ObjectHideFlags: 0
@@ -6190,18 +6190,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abeddf06ec05bc94ca5493e3c86cd358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
-  _ball: {fileID: 954123473}
-  _arms: {fileID: 727752689}
-  _posOverhead: {fileID: 1062906633}
-  _posDribble: {fileID: 1998687128}
-  _target: {fileID: 1874402472}
-  _missRange: 0.5
-  _minBounds: {x: -3.75, y: 0.5, z: -6.9}
-  _maxBounds: {x: 3.75, y: 5, z: 6.9}
-  _throwHeight: 5
-  _stealRange: 0.5
-  _isBallInHands: 0
+  speed: 4
+  ball: {fileID: 954123473}
+  arms: {fileID: 727752689}
+  posOverhead: {fileID: 1062906633}
+  posDribble: {fileID: 1998687128}
+  target: {fileID: 1874402472}
+  missRange: 0.5
+  minBounds: {x: -3.7, y: 0.5, z: -6.9}
+  maxBounds: {x: 3.7, y: 5, z: 6.9}
+  throwHeight: 5
+  stealRange: 0.5
+  isBallInHands: 0
 --- !u!136 &1864368212
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField] Text _scoreText;  
-    private int _score = 0;  
+    [SerializeField] Text scoreText;  
+    private int score = 0;  
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,8 +15,8 @@ public class Score : MonoBehaviour
 
     private void UpdateScore(int points)
     {
-        _score += points;
-        _scoreText.text = "Score: " + _score;
+        score += points;
+        scoreText.text = "Score: " + score;
     }
 }
 
